@@ -14,11 +14,11 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def start():
+def start():  # put application's code here
     return "<h1>start</h1>"
 
 
-@app.route("/generate/")
+@app.route("/generate-users/")
 @use_args({"amount": fields.Int(missing=10)}, location="query")
 def generate_users_(args):
     amount = args["amount"]
@@ -26,14 +26,14 @@ def generate_users_(args):
     return f"<ol>{''.join(f'<li>{user.name} - {user.email}</li>' for user in users)} </ol>"
 
 
-@app.route("/reception file/")
+@app.route("/get-content/")
 def get_content():
     create_txt_file(name_file="fake_text")
     get_content_ = read_text_file(name_file="fake_text")
     return f"<p><blockquote>{get_content_}</blockquote></p>"
 
 
-@app.route("/astronaut/")
+@app.route("/space/")
 def space():  # put application's code here
     get_requests_data(url="http://api.open-notify.org/astros.json")
     astro_ = number_of_astro(name_file="output")
@@ -46,6 +46,7 @@ def mean():
     get_download_file(url)
     mean = average_value_from_csv(name_file="output")
     return f"<p><span>{mean}</span></p>"
+    # put application's code here
 
 
 if __name__ == "__main__":
